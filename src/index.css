@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 260 90% 4%;
+    --foreground: 0 0% 98%;
+    --card: 260 50% 8%;
+    --card-foreground: 0 0% 98%;
+    --popover: 260 50% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 274 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 274 40% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 260 30% 14%;
+    --muted-foreground: 260 10% 60%;
+    --accent: 274 60% 35%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 274 40% 20%;
+    --input: 274 40% 18%;
+    --ring: 274 83% 58%;
+    --radius: 0.625rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#0D0221] text-foreground;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  code, .mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(157, 78, 221, 0.5), 0 0 40px rgba(157, 78, 221, 0.3);
+  }
+  .glass-surface {
+    background: rgba(36, 0, 70, 0.65);
+    backdrop-filter: blur(24px) brightness(1.1);
+    -webkit-backdrop-filter: blur(24px) brightness(1.1);
+    border: 1px solid rgba(123, 44, 191, 0.5);
+  }
+  .glass-surface-light {
+    background: rgba(36, 0, 70, 0.35);
+    backdrop-filter: blur(16px) brightness(1.05);
+    -webkit-backdrop-filter: blur(16px) brightness(1.05);
+    border: 1px solid rgba(123, 44, 191, 0.3);
+  }
+  .neon-border {
+    border: 1px solid rgba(123, 44, 191, 0.6);
+    box-shadow: 0 0 10px rgba(123, 44, 191, 0.3), inset 0 0 10px rgba(123, 44, 191, 0.1);
+  }
+  .grid-overlay {
+    background-image: 
+      linear-gradient(rgba(157, 78, 221, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(157, 78, 221, 0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #E0AAFF, #9D4EDD, #7B2CBF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .btn-gradient {
+    background: linear-gradient(135deg, #10002B, #7B2CBF);
+    transition: all 0.3s ease;
+  }
+  .btn-gradient:hover {
+    background: linear-gradient(135deg, #240046, #9D4EDD);
+    box-shadow: 0 0 20px rgba(123, 44, 191, 0.5);
+    transform: translateY(-1px);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0D0221;
+}
+::-webkit-scrollbar-thumb {
+  background: #3C096C;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7B2CBF;
+}
