@@ -1,4 +1,4 @@
-# NexusVault
+# Lotaya Digital Store
 
 A premium digital products storefront for AI tools, media subscriptions, creative software, and more. Built with a cinematic dark-purple aesthetic and a full admin dashboard.
 

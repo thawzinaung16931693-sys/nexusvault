@@ -13,13 +13,13 @@ interface ProductCardProps {
     price: string;
     originalPrice: string | null;
     image: string | null;
-    type: "subscription" | "one_time";
-    billingPeriod: "monthly" | "yearly" | "lifetime" | null;
+    type: string;
+    billingPeriod: string | null;
     rating: string | null;
     reviewCount: number | null;
     salesCount: number | null;
     categoryName: string | null;
-    isFeatured: "yes" | "no";
+    isFeatured: string;
   };
   cartId?: number;
   onAddToCart?: () => void;

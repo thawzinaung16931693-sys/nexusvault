@@ -1,4 +1,4 @@
-# NexusVault Info
+# Lotaya Digital Store Info
 
 ## Database Setup
 

@@ -90,14 +90,14 @@ export default function Home() {
             <div className="flex items-center gap-3 mb-6">
               <Hexagon className="w-12 h-12 text-[#9D4EDD]" />
               <span className="text-4xl md:text-5xl font-bold text-white font-['Space_Grotesk'] tracking-wider">
-                NEXUS<span className="text-[#9D4EDD]">VAULT</span>
+              LOTAYA<span className="text-[#9D4EDD]"> DIGITAL STORE</span>
               </span>
             </div>
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 font-['Space_Grotesk'] text-glow">
-              YOUR DIGITAL ARSENAL
+              YOUR DIGITAL STORE
             </h1>
             <p className="text-gray-400 text-base md:text-lg max-w-xl mb-8">
-              Premium digital products, AI tools, media subscriptions, and creative software — all in one secure vault.
+              Premium digital products, AI tools, media subscriptions, and creative software — all in one secure store.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link to="/products">
@@ -176,7 +176,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-3 font-['Space_Grotesk']">
-              Why <span className="gradient-text">NexusVault</span>
+              Why <span className="gradient-text">Lotaya Digital Store</span>
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -199,7 +199,7 @@ export default function Home() {
             Ready to Unlock Your Digital Potential?
           </h2>
           <p className="text-gray-400 mb-8">
-            Join thousands of professionals who trust NexusVault for their digital toolkit.
+            Join thousands of professionals who trust Lotaya Digital Store for their digital toolkit.
           </p>
           <Link to="/products">
             <Button className="btn-gradient text-white px-8 py-3 rounded-xl text-base font-semibold">
@@ -215,13 +215,13 @@ export default function Home() {
           <div className="flex items-center gap-2">
             <Hexagon className="w-6 h-6 text-[#9D4EDD]" />
             <span className="text-lg font-bold text-white font-['Space_Grotesk']">
-              Nexus<span className="text-[#9D4EDD]">Vault</span>
+              Lotaya<span className="text-[#9D4EDD]"> Digital Store</span>
             </span>
           </div>
           <div className="flex items-center gap-6 text-sm text-gray-500">
             <Link to="/products" className="hover:text-[#9D4EDD] transition-colors">Products</Link>
             <Link to="/categories" className="hover:text-[#9D4EDD] transition-colors">Categories</Link>
-            <span>2026 NexusVault. All rights reserved.</span>
+            <span>2026 Lotaya Digital Store. All rights reserved.</span>
           </div>
         </div>
       </footer>

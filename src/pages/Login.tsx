@@ -22,8 +22,8 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center relative z-10 px-4">
       <Card className="w-full max-w-sm glass-surface border-[#7B2CBF]/30">
         <CardHeader className="text-center">
-          <CardTitle className="text-white text-xl font-['Space_Grotesk']">Welcome to NexusVault</CardTitle>
-          <p className="text-gray-400 text-sm mt-1">Sign in to access your digital arsenal</p>
+          <CardTitle className="text-white text-xl font-['Space_Grotesk']">Welcome to Lotaya Digital Store</CardTitle>
+          <p className="text-gray-400 text-sm mt-1">Sign in to access your digital store</p>
         </CardHeader>
         <CardContent>
           <Button

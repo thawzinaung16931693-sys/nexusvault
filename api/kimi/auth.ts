@@ -1,4 +1,3 @@
-import { Hono } from "hono";
 import { eq } from "drizzle-orm";
 import { users } from "@db/schema";
 import { getDb } from "../queries/connection";
@@ -24,14 +23,19 @@ export async function handleOAuthCallback(c: any) {
     }),
   });
 
-  const tokenData = await tokenRes.json();
+  const tokenData = (await tokenRes.json()) as { access_token?: string };
   if (!tokenData.access_token) return c.text("Auth failed", 401);
 
   // Get user info
   const userRes = await fetch(`${env.kimiOpenUrl}/api/user`, {
     headers: { Authorization: `Bearer ${tokenData.access_token}` },
   });
-  const userData = await userRes.json();
+  const userData = (await userRes.json()) as {
+    union_id: string;
+    name: string;
+    email: string;
+    avatar: string;
+  };
 
   // Upsert user
   const db = getDb();
