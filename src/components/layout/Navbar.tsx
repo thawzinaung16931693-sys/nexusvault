@@ -48,7 +48,7 @@ export default function Navbar() {
           <Link to="/" className="flex items-center gap-2 group">
             <Hexagon className="w-8 h-8 text-[#9D4EDD] group-hover:text-[#E0AAFF] transition-colors" />
             <span className="text-xl font-bold text-white font-['Space_Grotesk'] tracking-wide">
-              Nexus<span className="text-[#9D4EDD]">Vault</span>
+              Lotaya<span className="text-[#9D4EDD]"> Digital Store</span>
             </span>
           </Link>
 

@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
 import { serveStatic } from "hono/bun";
-import { trpcServer } from "@trpc/server/adapters/fetch";
+import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "./router";
 import { createContext } from "./context";
 import { handleOAuthCallback } from "./kimi/auth";
@@ -17,12 +17,13 @@ app.get("/api/oauth/callback", handleOAuthCallback);
 
 // tRPC
 app.use("/api/trpc/*", async (c) => {
-  return trpcServer({
+  const response = await fetchRequestHandler({
+    endpoint: "/api/trpc",
     router: appRouter,
-    createContext,
     req: c.req.raw,
-    resHeaders: c.res.headers,
-  })(c);
+    createContext,
+  });
+  return response;
 });
 
 // Static files
