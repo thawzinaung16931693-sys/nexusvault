@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router";
 import { trpc } from "@/providers/trpc";
-import { useAuth } from "@/hooks/useAuth";
 import ProductCard from "@/components/products/ProductCard";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, SlidersHorizontal, Grid3X3, LayoutList, X } from "lucide-react";
 
 export default function Products() {
-  const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(searchParams.get("category") || "");
@@ -25,7 +23,7 @@ export default function Products() {
 
   const sessionId = localStorage.getItem("cartSessionId") || undefined;
   const { data: cartData } = trpc.cart.get.useQuery(
-    user?.id ? { userId: user.id } : sessionId ? { sessionId } : undefined
+    sessionId ? { sessionId } : undefined
   );
   const cartId = cartData?.id;
 

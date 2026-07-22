@@ -1,40 +1,57 @@
-import { useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
-import { trpc } from "@/providers/trpc";
+import { authClient } from "@/auth";
 import { LOGIN_PATH } from "@/const";
+
+interface AuthUser {
+  id: string;
+  name: string | null;
+  email: string;
+  image: string | null;
+  role?: string;
+}
 
 export function useAuth(options?: {
   redirectOnUnauthenticated?: boolean;
   redirectPath?: string;
 }) {
-  const utils = trpc.useUtils();
   const navigate = useNavigate();
-  const { data: user, isLoading } = trpc.auth.me.useQuery(undefined, {
-    retry: false,
-    refetchOnWindowFocus: false,
-  });
-  const logoutMutation = trpc.auth.logout.useMutation({
-    onSuccess: () => {
-      utils.invalidate();
-      window.location.reload();
-    },
-  });
+  const [user, setUser] = useState<AuthUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (
-      options?.redirectOnUnauthenticated &&
-      !isLoading &&
-      !user
-    ) {
+    authClient.getSession().then((result) => {
+      if (result.data?.session && result.data?.user) {
+        const u = result.data.user;
+        setUser({
+          id: u.id,
+          name: u.name ?? null,
+          email: u.email,
+          image: u.image ?? null,
+          role: (u as any).role ?? "user",
+        });
+      }
+      setIsLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (options?.redirectOnUnauthenticated && !isLoading && !user) {
       navigate(options.redirectPath || LOGIN_PATH);
     }
   }, [options, isLoading, user, navigate]);
+
+  const logout = useCallback(async () => {
+    await authClient.signOut();
+    setUser(null);
+    window.location.reload();
+  }, []);
 
   return {
     user,
     isLoading,
     isAuthenticated: !!user,
     isAdmin: user?.role === "admin",
-    logout: () => logoutMutation.mutate(),
+    logout,
   };
 }

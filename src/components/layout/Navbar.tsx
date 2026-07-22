@@ -24,7 +24,7 @@ export default function Navbar() {
 
   const sessionId = localStorage.getItem("cartSessionId") || undefined;
   const { data: cartData } = trpc.cart.get.useQuery(
-    user?.id ? { userId: user.id } : sessionId ? { sessionId } : undefined,
+    sessionId ? { sessionId } : undefined,
     { enabled: true, refetchInterval: 3000 }
   );
   const cartCount = cartData?.items?.length ?? 0;

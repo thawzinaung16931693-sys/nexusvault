@@ -6,15 +6,11 @@ import { serveStatic } from "@hono/node-server/serve-static";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "./router";
 import { createContext } from "./context";
-import { handleOAuthCallback } from "./kimi/auth";
 
 const app = new Hono();
 
 app.use(logger());
 app.use(cors({ origin: "*", credentials: true }));
-
-// OAuth callback
-app.get("/api/oauth/callback", handleOAuthCallback);
 
 // tRPC
 app.use("/api/trpc/*", async (c) => {

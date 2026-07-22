@@ -22,7 +22,7 @@ export default function Cart() {
   const utils = trpc.useUtils();
 
   const { data: cart, isLoading } = trpc.cart.get.useQuery(
-    user?.id ? { userId: user.id } : sessionId ? { sessionId } : undefined
+    sessionId ? { sessionId } : undefined
   );
 
   const removeItem = trpc.cart.removeItem.useMutation({

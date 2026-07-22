@@ -1,6 +1,5 @@
 import { useParams, Link } from "react-router";
 import { trpc } from "@/providers/trpc";
-import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -18,7 +17,6 @@ import { useState } from "react";
 
 export default function ProductDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const { user } = useAuth();
   const [added, setAdded] = useState(false);
 
   const { data: product, isLoading } = trpc.product.bySlug.useQuery(
@@ -33,7 +31,7 @@ export default function ProductDetail() {
 
   const sessionId = localStorage.getItem("cartSessionId") || undefined;
   const { data: cartData } = trpc.cart.get.useQuery(
-    user?.id ? { userId: user.id } : sessionId ? { sessionId } : undefined
+    sessionId ? { sessionId } : undefined
   );
   const cartId = cartData?.id;
 

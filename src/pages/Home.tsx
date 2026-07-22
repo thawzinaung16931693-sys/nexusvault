@@ -1,20 +1,18 @@
 import { useEffect, useRef } from "react";
 import { Link } from "react-router";
 import { trpc } from "@/providers/trpc";
-import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/products/ProductCard";
 import { Zap, Shield, Globe, Cpu, ArrowRight, Hexagon, ChevronDown } from "lucide-react";
 
 export default function Home() {
-  const { user } = useAuth();
   const { data: featuredProducts } = trpc.product.list.useQuery({ featured: true });
   const { data: allProducts } = trpc.product.list.useQuery({});
   const { data: categories } = trpc.category.list.useQuery();
 
   const sessionId = localStorage.getItem("cartSessionId") || undefined;
   const { data: cartData } = trpc.cart.get.useQuery(
-    user?.id ? { userId: user.id } : sessionId ? { sessionId } : undefined
+    sessionId ? { sessionId } : undefined
   );
   const cartId = cartData?.id;
 

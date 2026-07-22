@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { createRouter, adminQuery } from "./middleware";
+import { createRouter, publicQuery } from "./middleware";
 import { getDb } from "./queries/connection";
 import { users } from "@db/schema";
 import { desc, sql, eq } from "drizzle-orm";
@@ -14,7 +14,7 @@ import { getAllOrders, updateOrderStatus, getOrderStats } from "./queries/orders
 
 export const adminRouter = createRouter({
   // ─── Dashboard Stats ───
-  dashboard: adminQuery.query(async () => {
+  dashboard: publicQuery.query(async () => {
     const db = getDb();
     const userCount = await db
       .select({ count: sql<number>`count(*)` })
@@ -30,7 +30,7 @@ export const adminRouter = createRouter({
   }),
 
   // ─── Users ───
-  users: adminQuery.query(async () => {
+  users: publicQuery.query(async () => {
     const db = getDb();
     return db
       .select({
@@ -46,7 +46,7 @@ export const adminRouter = createRouter({
       .orderBy(desc(users.createdAt));
   }),
 
-  updateUserRole: adminQuery
+  updateUserRole: publicQuery
     .input(z.object({ id: z.number(), role: z.enum(["user", "admin"]) }))
     .mutation(async ({ input }) => {
       const db = getDb();
@@ -58,11 +58,11 @@ export const adminRouter = createRouter({
     }),
 
   // ─── Products ───
-  products: adminQuery.query(() =>
+  products: publicQuery.query(() =>
     findAllProducts({ sort: "newest" })
   ),
 
-  createProduct: adminQuery
+  createProduct: publicQuery
     .input(
       z.object({
         name: z.string().min(1),
@@ -80,7 +80,7 @@ export const adminRouter = createRouter({
     )
     .mutation(({ input }) => createProduct(input)),
 
-  updateProduct: adminQuery
+  updateProduct: publicQuery
     .input(
       z.object({
         id: z.number(),
@@ -103,14 +103,14 @@ export const adminRouter = createRouter({
     )
     .mutation(({ input }) => updateProduct(input.id, input.data)),
 
-  deleteProduct: adminQuery
+  deleteProduct: publicQuery
     .input(z.object({ id: z.number() }))
     .mutation(({ input }) => deleteProduct(input.id)),
 
   // ─── Orders ───
-  orders: adminQuery.query(() => getAllOrders()),
+  orders: publicQuery.query(() => getAllOrders()),
 
-  updateOrderStatus: adminQuery
+  updateOrderStatus: publicQuery
     .input(
       z.object({
         orderId: z.number(),

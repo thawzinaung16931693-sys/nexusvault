@@ -47,14 +47,11 @@ echo "[3/6] Checking environment variables..."
 if [ ! -f .env ]; then
     echo "Creating .env file... Please edit it with your actual values!"
     cat > .env << 'EOF'
-# Database (Neon PostgreSQL or any PostgreSQL connection string)
+# Database (Neon PostgreSQL)
 DATABASE_URL=postgresql://user:password@host/database?sslmode=require
 
-# Kimi OAuth
-APP_ID=your_app_id
-APP_SECRET=your_app_secret
-KIMI_AUTH_URL=https://your-kimi-auth-url
-KIMI_OPEN_URL=https://your-kimi-open-url
+# Neon Auth (get from Neon Console → Project → Branch → Auth)
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.region.aws.neon.tech/neondb/auth
 
 # Optional
 OWNER_UNION_ID=

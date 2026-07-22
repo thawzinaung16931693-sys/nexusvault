@@ -17,9 +17,10 @@ export default function Orders() {
     redirectPath: LOGIN_PATH,
   });
 
-  const { data: orders, isLoading } = trpc.order.myOrders.useQuery(undefined, {
-    enabled: !!user,
-  });
+  const { data: orders, isLoading } = trpc.order.myOrders.useQuery(
+    { email: user?.email || undefined },
+    { enabled: !!user }
+  );
 
   if (authLoading || isLoading) {
     return (
